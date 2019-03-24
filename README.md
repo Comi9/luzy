@@ -1,4 +1,4 @@
-# luzy
+# luzy [iOS]
 
 1. Clone this project
 2. `cd luzy && npm i`
