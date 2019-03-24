@@ -264,7 +264,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center'
+    alignItems:'center',
+    height: 52
   },
   signinSection: {
     backgroundColor: '#02152A'
@@ -304,7 +305,8 @@ const styles = StyleSheet.create({
   accountOptions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 16
+    marginTop: 16,
+    height: 20
   },
   remeberUserOptionWrapper: {
     flex: 1,
@@ -341,7 +343,8 @@ const styles = StyleSheet.create({
   socialSigninIconsWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 8
+    marginTop: 8,
+    height: 50
   },
   socialSigninIcon: {
     marginHorizontal: 10
@@ -357,14 +360,14 @@ const styles = StyleSheet.create({
   },
   footerItems: {
     paddingTop: 20,
-    paddingBottom: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF'
   },
   footerItemWrapper: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 25
   },
   footerItemText: {
     marginLeft: 10,
