@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TextInput,
   Image,
   Alert,
@@ -89,133 +90,137 @@ export default class Login extends Component {
           </View>
         </View>
 
-        {/* AppSignin */}
-        <View style={[styles.section, styles.signinSection]}>
-          <View style={styles.sectionInner}>
-            <View style={styles.sectionTitle}>
-              <Text style={styles.title}>SIGN IN</Text>
-              <Text style={styles.subTitle}>with LUZY account:</Text>
-            </View>
-            <Text style={styles.inputLabel}>USERNAME:</Text>
-            <View style={styles.textInputWrapper}>
-              <View style={styles.textInputIcon}>
-                <SvgUri width="26" height="21" source={placeholeder_email_icon} />
+        <ScrollView>
+          {/* AppSignin */}
+          <View style={[styles.section, styles.signinSection]}>
+            <View style={styles.sectionInner}>
+              <View style={styles.sectionTitle}>
+                <Text style={styles.title}>SIGN IN</Text>
+                <Text style={styles.subTitle}>with LUZY account:</Text>
               </View>
-              <TextInput
-                autoCapitalize='none'
-                autoFocus={true}
-                textContentType='none'
-                autocomplete='off'
-                placeholder={'Your email address'}
-                placeholderTextColor={'#054993'}
-                style={styles.textInput}
-                onChangeText={(in_Username) => this.setState({in_Username})}
-                value={this.state.username} />
-              <View style={styles.textInputIcon}>
-                <SvgUri width="26" height="21" source={checked_icon} />
+              <Text style={styles.inputLabel}>USERNAME:</Text>
+              <View style={styles.textInputWrapper}>
+                <View style={styles.textInputIcon}>
+                  <SvgUri width="26" height="21" source={placeholeder_email_icon} />
+                </View>
+                <TextInput
+                  autoCapitalize='none'
+                  autoFocus={true}
+                  textContentType='none'
+                  autocomplete='off'
+                  placeholder={'Your email address'}
+                  placeholderTextColor={'#054993'}
+                  style={styles.textInput}
+                  onChangeText={(in_Username) => this.setState({in_Username})}
+                  value={this.state.username} />
+                <View style={[styles.textInputIcon, styles.alignRight]}>
+                  <SvgUri width="26" height="21" source={checked_icon} />
+                </View>
               </View>
-            </View>
 
-            <Text style={[styles.inputLabel, styles.separator]}>PASSWORD:</Text>
-            <View style={styles.textInputWrapper}>
-              <View style={styles.textInputIcon}>
-                <SvgUri width="22" height="25" source={placeholeder_password_icon} />
+              <Text style={[styles.inputLabel, styles.separator]}>PASSWORD:</Text>
+              <View style={styles.textInputWrapper}>
+                <View style={styles.textInputIcon}>
+                  <SvgUri width="22" height="25" source={placeholeder_password_icon} />
+                </View>
+                <TextInput
+                  secureTextEntry={this.state.secureTextEntry}
+                  textContentType='none'
+                  autocomplete='off'
+                  placeholder={'Your password'}
+                  placeholderTextColor={'#054993'}
+                  style={styles.textInput}
+                  onChangeText={(in_Password) => this.setState({in_Password})}
+                  value={this.state.password} />
+                <View style={[styles.textInputIcon, styles.alignRight]}>
+                  <TouchableOpacity onPress={() => this.secureTextEntry()}>
+                    <SvgUri width="27" height="20" source={this.state.secureTextEntry ? show_password_off_icon : show_password_on_icon} />
+                  </TouchableOpacity>
+                </View>
               </View>
-              <TextInput
-                secureTextEntry={this.state.secureTextEntry}
-                textContentType='none'
-                autocomplete='off'
-                placeholder={'Your password'}
-                placeholderTextColor={'#054993'}
-                style={styles.textInput}
-                onChangeText={(in_Password) => this.setState({in_Password})}
-                value={this.state.password} />
-              <View style={styles.textInputIcon}>
-                <TouchableOpacity onPress={() => this.secureTextEntry()}>
-                  <SvgUri width="27" height="20" source={this.state.secureTextEntry ? show_password_off_icon : show_password_on_icon} />
+
+              <View style={styles.accountOptions}>
+                <TouchableOpacity onPress={() => this.rememberMeAction()}>
+                  <View style={styles.remeberUserOptionWrapper}>
+                    <SvgUri width="20" height="20" source={remember_me_checkmark_icon} />
+                    <Text style={[styles.accountOptionsText, styles.accountOptionsTextSpacing]}>Remember me</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => this.forgotPasswordAction()}>
+                  <View style={styles.forgotPasswordOptionWrapper}>
+                    <Text style={styles.accountOptionsText}>Forgot your password?</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
-            </View>
 
-            <View style={styles.accountOptions}>
-              <TouchableOpacity onPress={() => this.rememberMeAction()}>
-                <View style={styles.remeberUserOptionWrapper}>
-                  <SvgUri width="20" height="20" source={remember_me_checkmark_icon} />
-                  <Text style={[styles.accountOptionsText, styles.accountOptionsTextSpacing]}>Remember me</Text>
+              <TouchableOpacity onPress={() => this.onPressSignin()}>
+                <View style={styles.signinButtonWrapper}>
+                  <Text style={styles.button}>LOGIN</Text>
                 </View>
               </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => this.forgotPasswordAction()}>
-                <Text style={styles.accountOptionsText}>Forgot your password?</Text>
-              </TouchableOpacity>
             </View>
-
-            <TouchableOpacity onPress={() => this.onPressSignin()}>
-              <View style={styles.signinButtonWrapper}>
-                <Text style={styles.button}>LOGIN</Text>
-              </View>
-            </TouchableOpacity>
           </View>
-        </View>
 
-        {/* AppSocialSignin */}
-        <View style={[styles.section, styles.socialSigninSection]}>
-          <View style={styles.sectionInner}>
-            <View style={styles.sectionTitle}>
-              <Text style={styles.title}>SIGN IN</Text>
-              <Text style={styles.subTitle}>with your social media account:</Text>
-            </View>
-            <View style={styles.socialSigninIconsWrapper}>
-              <View style={styles.socialSigninIcon}>
-              <TouchableOpacity onPress={() => this.onPressSocialSigninWith('Facebook')}>
-                <SvgUri width="50" height="50" source={facebook_icon} />
-              </TouchableOpacity>
+          {/* AppSocialSignin */}
+          <View style={[styles.section, styles.socialSigninSection]}>
+            <View style={styles.sectionInner}>
+              <View style={styles.sectionTitle}>
+                <Text style={styles.title}>SIGN IN</Text>
+                <Text style={styles.subTitle}>with your social media account:</Text>
               </View>
-              <View style={styles.socialSigninIcon}>
-              <TouchableOpacity onPress={() => this.onPressSocialSigninWith('Twitter')}>
-                <SvgUri width="50" height="50" source={twitter_icon} />
-              </TouchableOpacity>
-              </View>
-              <View style={styles.socialSigninIcon}>
-              <TouchableOpacity onPress={() => this.onPressSocialSigninWith('Instagram')}>
-                <SvgUri width="50" height="50" source={instagram_icon} />
-              </TouchableOpacity>
+              <View style={styles.socialSigninIconsWrapper}>
+                <View style={styles.socialSigninIcon}>
+                <TouchableOpacity onPress={() => this.onPressSocialSigninWith('Facebook')}>
+                  <SvgUri width="50" height="50" source={facebook_icon} />
+                </TouchableOpacity>
+                </View>
+                <View style={styles.socialSigninIcon}>
+                <TouchableOpacity onPress={() => this.onPressSocialSigninWith('Twitter')}>
+                  <SvgUri width="50" height="50" source={twitter_icon} />
+                </TouchableOpacity>
+                </View>
+                <View style={styles.socialSigninIcon}>
+                <TouchableOpacity onPress={() => this.onPressSocialSigninWith('Instagram')}>
+                  <SvgUri width="50" height="50" source={instagram_icon} />
+                </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>
-        </View>
 
-        {/* AppSocialSignup */}
-        <View style={[styles.section, styles.signupSection]}>
-          <View style={styles.sectionInner}>
-            <View style={styles.sectionTitle}>
-              <Text style={[styles.title, styles.darkColor]}>SIGN UP</Text>
+          {/* AppSocialSignup */}
+          <View style={[styles.section, styles.signupSection]}>
+            <View style={styles.sectionInner}>
+              <View style={styles.sectionTitle}>
+                <Text style={[styles.title, styles.darkColor]}>SIGN UP</Text>
+              </View>
+              <TouchableOpacity onPress={() => this.onPressSignup()}>
+                <View style={styles.signupButtonWrapper}>
+                  <Text style={styles.button}>CREATE ACCOUNT</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => this.onPressSignup()}>
-              <View style={styles.signupButtonWrapper}>
-                <Text style={styles.button}>CREATE ACCOUNT</Text>
-              </View>
-            </TouchableOpacity>
           </View>
-        </View>
 
-        {/* AppFooter */}
-        <View style={[styles.section]}>
-          <View style={[styles.sectionInner, styles.footerItems]}>
-            <TouchableOpacity onPress={() => this.aboutUsAction()}>
-              <View style={styles.footerItemWrapper}>
-                <SvgUri width="30" height="30" source={about_us_icon} />
-                <Text style={styles.footerItemText}>About us</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.needHelpAction()}>
-              <View style={styles.footerItemWrapper}>
-                <SvgUri width="30" height="30" source={need_help_icon} />
-                <Text style={styles.footerItemText}>Need help</Text>
-              </View>
-            </TouchableOpacity>
+          {/* AppFooter */}
+          <View style={[styles.section]}>
+            <View style={[styles.sectionInner, styles.footerItems]}>
+              <TouchableOpacity onPress={() => this.aboutUsAction()}>
+                <View style={styles.footerItemWrapper}>
+                  <SvgUri width="30" height="30" source={about_us_icon} />
+                  <Text style={styles.footerItemText}>About us</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.needHelpAction()}>
+                <View style={styles.footerItemWrapper}>
+                  <SvgUri width="30" height="30" source={need_help_icon} />
+                  <Text style={styles.footerItemText}>Need help</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
 
@@ -276,7 +281,6 @@ const styles = StyleSheet.create({
   textInputWrapper: {
     flexDirection: 'row',
     alignItems:'center',
-    justifyContent: 'space-between',
     backgroundColor: '#011e3f',
     borderRadius: 8,
     paddingRight: 10,
@@ -284,14 +288,17 @@ const styles = StyleSheet.create({
   },
   textInputIcon: {
     alignItems:'center',
-    width: 28
+    width: 30
+  },
+  alignRight: {
+    marginLeft: 'auto'
   },
   textInput: {
+    flex: 1,
     paddingTop: 14,
     paddingRight: 8,
     paddingBottom: 14,
     paddingLeft: 8,
-    flexBasis: '80%',
     color: '#FFFFFF'
   },
   accountOptions: {
@@ -300,6 +307,11 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   remeberUserOptionWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  forgotPasswordOptionWrapper: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
