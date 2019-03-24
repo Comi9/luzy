@@ -366,7 +366,8 @@ const styles = StyleSheet.create({
   },
   footerItemWrapper: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 25
   },
   footerItemText: {
     marginLeft: 10,
